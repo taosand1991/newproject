@@ -13,4 +13,5 @@ urlpatterns = [
     path('<int:pk>/share_post/', views.share_post, name='share'),
     path('<category>', views.category_details, name='category'),
 
+
 ]
