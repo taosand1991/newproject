@@ -24,7 +24,7 @@ SECRET_KEY = '#-5k&c^a-&udp&9+wk@j#uvr8ja58$kpoow%fy!85_(c(px^bv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['legacygraphics.pythonanywhere.com']
 
 # Application definition
 
