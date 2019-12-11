@@ -36,6 +36,10 @@ class Post(models.Model):
     tags = models.ManyToManyField(Category, related_name='cattys', default=1)
     cover = models.ImageField(upload_to='img/', blank=True, null=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='posts')
+    favorites = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='favors')
+    tablets = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='tablet')
+
 
 
     def __str__(self):
@@ -43,6 +47,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', args=[self.pk])
+
+    @property
+    def total_likes(self):
+        return self.likes.count()
 
 
 class Comment(models.Model):

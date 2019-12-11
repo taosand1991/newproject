@@ -1,23 +1,83 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% crispy CommentForm  %}
 {% block tiltle %}BLOG DETAILS{% endblock %}
 {% block content %}
 <body>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-        <div class="card-body">
-    <h4 class="card-title text">{{ post.title }}</h4>
+        <div id="tag-like" class="card-body">
+    <h4 class="card-header">{{ post.title }}</h4>
             {% for tag in post.tags.all %}
-            <span class="badge badge-secondary"><small>{{ tag.name }}</small></span></h4>
+            <p>Published date: {{ post.created_on }} | <span class="badge badge-primary">{{ tag.name }}</span></p></h4>
+                <hr>
             {% endfor %}
             <p class="card-text">{{ post.body }}</p>
             <p class="card-text text-right">{{ post.created_on }}</p>
             <p class="text-right" style="border: 5px red;"><a href="{% url 'share' post.pk %}"><span class="fas fa-share">&nbsp; Share Post</span></a></p>
+{#           {% if is_liked %}#}
+{##}
+{#            <a id="like" class=" btn btn-default" href="{% url 'like' post.pk %}"><i class=" like-span fas fa-thumbs-down" style="color: red;">#}
+{##}
+{#            </i>&nbsp;<span class="badge badge-success">{{ post.likes.count }}</span></a>#}
+{#            {% else %}#}
+{#            <a id="unlike" class=" btn btn-default" href="{% url 'like' post.pk %}"><i class="like-span fas fa-thumbs-up" style="color: blue;">#}
+{##}
+{#            </i></a>#}
+
+{#            {% endif %}#}
             </div>
      </div>
 </div>
+<div id="like-section">
+    {% include 'blog/like_section.html' %}
+</div>
+
+{# {% if total_likes <= 0 %}#}
+{#        {% else %}#}
+{#    {{ total_likes }} like{{ total_likes| pluralize }}#}
+{#        {% endif %}#}
+{#{% if request.user.is_authenticated %}#}
+{##}
+{#    <form action="{% url 'like' %}" method="post">#}
+{##}
+{#        {% csrf_token %}#}
+{#        {% if is_liked  %}#}
+{#        <button  type="submit" id="like" name="post_id" value="{{ post.id }}" class=" btn btn-danger"><span class=" double fas fa-thumbs-down"></span></button>#}
+{#        {% else %}#}
+{#        <button  type="submit" id="like" name="post_id" value="{{ post.id }}" class=" btn btn-success"><span class=" double fas fa-thumbs-up"></span></button>#}
+{#        {% endif %}#}
+{#    {% endif %}#}
+{#    </form>#}
+
+{% include 'blog/favorite_section.html' %}
+
+    {% if is_tablet %}
+        <a class="fas fa-star" href="{% url 'tablets' post.id %}"></a>
+        {% else %}
+        <a class="far fa-star" href="{% url 'tablets' post.id %}"></a>
+        {% endif %}
+{#{% if request.user.is_authenticated %}#}
+{#<form action="{% url 'favorites' %}" method="post">#}
+{#    {% csrf_token %}#}
+{#    {% if is_favored %}#}
+{#    <button type="submit" name="post_pk" value="{{ post.id }}">Favorites</button>#}
+{#        {% else %}#}
+{#        <button type="submit" name="post_pk" value="{{ post.id }}">Unfavored</button>#}
+{#        {% endif %}#}
+{#{% endif %}#}
+{#</form>#}
+{#</div>#}
+{#<div id="like-section">#}
+{#    {% include 'blog/like_section.html' %}#}
+{#</div>#}
+{#<div id="favor-section" class="text-right">#}
+{#    {% include 'blog/favorite_section.html' %}#}
+
+
+
     <form action="{% url 'detail' post.pk %}" method="POST">
     {% csrf_token %}
     {{ form|crispy }}

@@ -12,6 +12,13 @@ urlpatterns = [
     path('<int:pk>/delete/', views.comment_delete, name='comment_delete'),
     path('<int:pk>/share_post/', views.share_post, name='share'),
     path('<category>', views.category_details, name='category'),
+    path('search/', views.search_result, name='search'),
+    path('contact/', views.contact_us, name='contact'),
+    path('likes/', views.liked_post, name='like'),
+    path('favorite/', views.favourite, name='favorite'),
+    path('tablets/<int:id>/', views.tablet_like, name='tablets'),
+
+
 
 
 ]

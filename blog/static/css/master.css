@@ -309,3 +309,6 @@ a.repeat:hover {
 .heas{
     color: yellow;
 }
+.asteriskField {
+    display: none;
+}

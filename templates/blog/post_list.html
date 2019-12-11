@@ -6,7 +6,13 @@
 
 {% block tiltle %}MY BLOG{% endblock %}
 {% block content %}
-
+    <div class="container">
+<ul class="list-inline text-center">
+    {% for category in categories %}
+    <li class="list-inline-item"><a href="{% url 'category' category %}">{{ category.name }}</a></li>
+    </ul>
+{% endfor %}
+    </div>
     <div class="container">
 <body class="over">
 
@@ -19,6 +25,7 @@
 
 </div>
 <p></p>
+
 
 
 <div class="row">
@@ -50,10 +57,12 @@
         {% if user.is_authenticated and user.is_superuser %}
     <li class="list-inline-item"><a class="btn btn-success" href="{% url 'edit' post.pk %}">Edit Post</a></li>
     <li class="list-inline-item"><a class="btn btn-success" href="{% url 'delete' post.pk %}">Delete Post</a></li><p></p>
-    {% endif %}
+       <hr>
+        {% endif %}
     </ul>
     {% empty %}
-    <p class="text-center text-danger">You have no Posts at this moment</p
+    <p class="text-center text-danger">You have no Posts at this moment</p>
+
 {% endfor %}
 
 

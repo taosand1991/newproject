@@ -7,7 +7,7 @@
         <li><a href="{% url 'detail' post.pk %}">{{ post.title }}</a></li>
         </ul>
         {% empty %}
-        No Posts Associated to this Topics
+        <p class="text-center">No posts associated with this Topic</p>
     {% endfor %}
     </div>
 {% endblock %}

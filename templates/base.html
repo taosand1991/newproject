@@ -14,12 +14,13 @@
       <li class="nav-item active {% if url_name == 'post_list' %}active{% endif %}">
         <a class="nav-link" href="{% url 'post_list' %}">Home</a>
       </li>
-            {% for category in categories  %}
-        <li  class="nav-item"><a class="nav-link" href="{% url 'category' category %}">{{ category.name }}</a></li>
-    {% endfor %}
+
       <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
         <a class="nav-link" href="{% url 'about' %}">About</a>
       </li>
+            <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
+            </li>
     </ul>
       <ul class="navbar-nav float-right">
           {% if user.is_authenticated %}
@@ -41,8 +42,8 @@
               <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
           {% endif %}
       </ul>
-            <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form action="{% url 'search' %}" class="form-inline my-2 my-lg-0" method="GET">
+      <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search for posts" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   {% endwith %}
@@ -85,14 +86,58 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-			  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-			  crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/query.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+$(document).on('click', '#like', function (e) {
+       e.preventDefault();
+       const pk = $(this).attr('value');
+       $.ajax({
+           url:"{%  url 'like' %}",
+           type: "POST",
+           data:{'post_id':pk, 'csrfmiddlewaretoken':'{{ csrf_token }}'},
+           dataType: 'json',
+           success: function (response) {
+               console.log($('#like-section').html(response['form']))
+           },
+           error: function (rs, e) {
+               console.log(rs.responseText);
+           },
+       });
+   });
+
+
+</script>
+
+    <script type="text/javascript">
+        $(document).ready(function (event) {
+            $(document).on('click', '#favored', function (event) {
+                event.preventDefault();
+                const id = $(this).attr('value')
+                $.ajax({
+                    url: '{% url 'favorite' %}',
+                    type: 'POST',
+                    dataType:'json',
+                    data:{'post_pk':id, 'csrfmiddlewaretoken':'{{ csrf_token }}'},
+                    success: function (response) {
+                        $('#favorite-section').html(response['form'])
+                    },
+                    error: function (rs, e) {
+                        console.log(rs.responseText);
+                    }
+                })
+            })
+})
+    </script>
+
 
   </body>
 </html>
