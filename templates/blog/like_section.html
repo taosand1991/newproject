@@ -1,0 +1,16 @@
+
+
+{% if total_likes <= 0 %}
+        {% else %}
+    {{ total_likes }} like{{ total_likes| pluralize }}
+        {% endif %}
+{% if request.user.is_authenticated %}
+    <form action="{% url 'like' %}" method="post">
+        {% csrf_token %}
+        {% if is_liked %}
+        <button  type="submit" id="like" name="post_id" value="{{ post.id }}" class=" btn btn-danger"><span class=" double fas fa-thumbs-down"> Dislike</span></button>
+        {% else %}
+        <button  type="submit" id="like" name="post_id" value="{{ post.id }}" class=" btn btn-primary"><span class=" double fas fa-thumbs-up"> Like</span></button>
+        {% endif %}
+    {% endif %}
+    </form>

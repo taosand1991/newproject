@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block tiltle %}
+    Search
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4 class="text-center">SEARCH RESULTS</h4>
+{% for result in object_list %}
+    <h3><a href="{% url 'detail' result.pk %}">{{ result.title }}</a></h3>
+
+    {% empty %}
+    <p class="text-center">No results found</p>
+{%  endfor  %}
+
+</div>
+{% endblock %}

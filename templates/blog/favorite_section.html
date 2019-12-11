@@ -1,0 +1,24 @@
+{#{% if request.user.is_authenticated %}#}
+{#<form action="{% url 'favorite' %}" method="POST">#}
+{#    {% csrf_token %}#}
+{#    {% if is_favored %}#}
+{#    <button class="btn btn-success" type="submit" id="liker" name="id"  data-id="{{ post.pk }}"><i class="far fa-star"></i>Favorite</button>#}
+{#    {% else %}#}
+{#        <button class="btn btn-danger" type="submit" id="liker" name="id"  data-id="{{ post.pk }}"><i class="fas fa-star"></i>Favorite</button>#}
+{#    {% endif %}#}
+{#{% endif %}#}
+{##}
+{#</form>#}
+
+<div id="favorite-section">
+{% if request.user.is_authenticated %}
+    <form action="{% url 'favorite' %}" method="post">
+    {% csrf_token %}
+    {% if is_favored %}
+    <button type="submit" id="favored" name="post_pk" value="{{ post.id }}" class="fas fa-heart"></button>
+    {% else %}
+    <button type="submit" id="favored" name="post_pk" value="{{ post.id }}" class="far fa-heart"></button>
+    {% endif %}
+    </form>
+{% endif %}
+</div>
