@@ -28,12 +28,14 @@
 {#            </i></a>#}
 
 {#            {% endif %}#}
+        <div class="float-right">{% include 'blog/favorite_section.html' %}</div>
             </div>
      </div>
 </div>
 <div id="like-section">
     {% include 'blog/like_section.html' %}
 </div>
+    <hr>
 
 {# {% if total_likes <= 0 %}#}
 {#        {% else %}#}
@@ -52,13 +54,13 @@
 {#    {% endif %}#}
 {#    </form>#}
 
-{% include 'blog/favorite_section.html' %}
 
-    {% if is_tablet %}
-        <a class="fas fa-star" href="{% url 'tablets' post.id %}"></a>
-        {% else %}
-        <a class="far fa-star" href="{% url 'tablets' post.id %}"></a>
-        {% endif %}
+
+{#    {% if is_tablet %}#}
+{#        <a class="fas fa-star" href="{% url 'tablets' post.id %}"></a>#}
+{#        {% else %}#}
+{#        <a class="far fa-star" href="{% url 'tablets' post.id %}"></a>#}
+{#        {% endif %}#}
 {#{% if request.user.is_authenticated %}#}
 {#<form action="{% url 'favorites' %}" method="post">#}
 {#    {% csrf_token %}#}

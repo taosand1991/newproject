@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.db.models import Q
 from django.template.loader import render_to_string
-from django.http import JsonResponse,HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse,HttpResponse, HttpResponseRedirect, Http404
 
 # Create your views here.
 
@@ -143,7 +143,8 @@ def search_result(request):
     if request.method == 'GET':
         query = request.GET.get('q')
         object_list = Post.objects.filter(
-            Q(title__icontains=query))
+            Q(title__icontains=query)|Q(categories__icontains=query))
+
     context = {'object_list': object_list}
     return render(request, 'blog/search_results.html', context)
 
