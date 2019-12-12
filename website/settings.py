@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'reset_migrations',
     'accounts',
     'blog.templatetags',
+    'portfolio'
 ]
 
 MIDDLEWARE = [
