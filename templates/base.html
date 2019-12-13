@@ -21,6 +21,21 @@
             <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
             </li>
+
+            <li class="nav-item dropdown{% if url_name == 'Porfolio' %}active{% endif %}">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Portfolio
+                </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if user.is_superuser %}
+                <a class="dropdown-item" href="{% url 'portfolio:create-port' %}">Create portfolio</a>
+                {% endif %}
+            </div>
+            </li>
+
+            <li class="nav-item {% if url_name == 'port-list' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'portfolio:port-list' %}">Portfolio section</a>
+            </li>
     </ul>
       <ul class="navbar-nav float-right">
           {% if user.is_authenticated %}

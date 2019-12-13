@@ -316,3 +316,8 @@ a.repeat:hover {
 :required{
   border-color: red;
 }
+.footer{
+  background-color: blue;
+  height: 50px;
+  color: white;
+}

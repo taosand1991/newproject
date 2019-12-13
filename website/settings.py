@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'reset_migrations',
     'accounts',
     'blog.templatetags',
-    'portfolio'
+    'portfolio',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -136,3 +136,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'post_list'
 LOGOUT_REDIRECT_URL = 'post_list'
+
+

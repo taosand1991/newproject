@@ -53,6 +53,7 @@ def profile_update(request):
         edit_form = ProfileEditForm(instance=request.user)
     return render(request, 'account/edit.html', {'user_form': user_form, "edit_form": edit_form})
 
+
 def password_change(request):
     if request.method == "POST":
         form = PasswordChangeForm(data=request.POST, user=request.user)
