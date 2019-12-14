@@ -12,60 +12,64 @@
     <ul class="navbar-nav mr-auto">
         {% with url_name=request.resolver_match.url_name %}
 
-      <li class="nav-item active {% if url_name == 'post_list' %}active{% endif %}">
+      <li class="nav-item{% if url_name == 'post_list' %}active{% endif %}">
         <a class="nav-link" href="{% url 'post_list' %}">Home</a>
       </li>
-
-      <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
+            <li class="nav-item {% if url_name == 'about' %}active{% endif %}">
         <a class="nav-link" href="{% url 'about' %}">About</a>
       </li>
-            <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
+         <li class="nav-item {% if url_name == 'contact' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
             </li>
-            {% if request.user.is_superuser %}
+            {% if user.is_superuser %}
             <li class="nav-item dropdown{% if url_name == 'Porfolio' %}active{% endif %}">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">Portfolio
                 </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'portfolio:create-port' %}">Create portfolio</a>
-                {% endif %}
             </div>
             </li>
-
-
-    </ul>
-      <ul class="navbar-nav float-right">
-          {% if user.is_authenticated %}
-              <li class="nav-item">
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="nav-item">
                   <a class="nav-link" href="{% url 'profile'   %}">Hi !({{ user.username }})<span class="fa fa-user"></span></a>
           </li>
-        <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-          </li>
-              </li>
-              <li class="nav-item {% if url_name == 'port-list' %}active{% endif %}">
-                <a class="nav-link" href="{% url 'portfolio:port-list' %}">Portfolio section</a>
-            </li>
-              <li class="nav-item {% if url_name == 'create' %}active{% endif %}">
+
+            <li class="nav-item {% if url_name == 'create' %}active{% endif %}">
               <a class="nav-link" href="{% url 'create' %}">Create Post &nbsp;<span class="fa fa-plus"></span></a>
           </li>
-              {% else %}
-          <li class="nav-item">
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+          </li>
+            {% else %}
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'login' %}">Log In</a>
           </li>
-              <li class="nav-item {% if url_name == 'register' %}active{% endif %}">
+
+            <li class="nav-item {% if url_name == 'register' %}active{% endif %}">
               <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
-          {% endif %}
-      </ul>
-            <form  action="{% url 'search' %}" class="form-inline my-2 my-lg-0 float-right" method="GET" >
+            </li>
+            {% endif %}
+            <li class="nav-item {% if url_name == 'port-list' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'portfolio:port-list' %}">Portfolio section</a>
+            </li>
+            </ul>
+             <form  action="{% url 'search' %}" class="form-inline my-2 my-lg-0 " method="GET" >
       <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search for posts" aria-label="Search" required>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-  {% endwith %}
 
-  </div>
-</nav>
+
+
+
+
+
+
+            </div>
+    {% endwith %}
+  </nav>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
