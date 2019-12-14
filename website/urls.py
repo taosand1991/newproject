@@ -25,7 +25,9 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('', include('accounts.urls')),
     path('portfolio/', include('portfolio.urls')),
+    path('', include('social_django.urls', namespace='social'))
 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

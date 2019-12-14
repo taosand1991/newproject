@@ -6,18 +6,20 @@ Portfolio Page
 
 {% block content %}
 
-<div class="container">
+<div class="container portfolio">
     <div class="row">
         {% for port in contacts %}
             <div class="col-lg-4">
             {% if port.thumbnail %}
                 <div class="card">
                 <img class="card-img-top img-thumbnail " src="{{ port.thumbnail.url }}"  alt="No pics">
-                <h3 class="card-title">{{ port.name }}</h3>
-                    <p><span class="badge badge-primary float-right">{{ port.get_categories_display }}</span></p>
-                <p class="card-text">{{ port.description }}</p>
+                <h3 class="card-title text-center">{{ port.name }}</h3>
+                    <p class="text-center"><span class="badge badge-primary">{{ port.get_categories_display }}</span></p>
+                <p class="card-text text-center">{{ port.description }}</p>
                     <a class="btn btn-success" href="{% url 'portfolio:port-detail' port.pk %}">Read More</a>
-                    <a class=" mt-4 btn btn-primary" href="{% url 'portfolio:port-update' port.pk %}">Edit portfolio</a>
+                    {% if request.user.is_superuser %}
+                    <a class=" mt-4 btn btn-primary" href="{% url 'portfolio:port-update' port.pk %}">Edit portfolio
+                    {% endif %}
 
                 </div>
             {% endif %}

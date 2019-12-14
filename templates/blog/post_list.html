@@ -6,10 +6,11 @@
 
 {% block tiltle %}MY BLOG{% endblock %}
 {% block content %}
+    <iframe src="https://www.naijaloaded.com" frameborder="5"></iframe>
     <div class="container">
 <ul class="list-inline text-center">
     {% for category in categories %}
-    <li class="list-inline-item"><a href="{% url 'category' category %}">{{ category.name }}</a></li>
+    <li class="list-inline-item "><a class="catty" href="{% url 'category' category %}">{{ category.name }}</a></li>
     </ul>
 {% endfor %}
     </div>

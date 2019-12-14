@@ -24,7 +24,7 @@ SECRET_KEY = '#-5k&c^a-&udp&9+wk@j#uvr8ja58$kpoow%fy!85_(c(px^bv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['legacygraphics.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['legacygraphics.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'blog.templatetags',
     'portfolio',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'website.urls'
@@ -67,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -123,6 +127,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'legacygraphical@gmail.com'
 EMAIL_HOST_PASSWORD = 'police1991@'
@@ -137,4 +149,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'post_list'
 LOGOUT_REDIRECT_URL = 'post_list'
 
+SOCIAL_AUTH_FACEBOOK_KEY = '439492756973136'
+SOCIAL_AUTH_FACEBOOK_SECRET = '3cd64381c36929215004d844a98cc85d'
 
+# SOCIAL_AUTH_USER_MODEL = 'so.User'

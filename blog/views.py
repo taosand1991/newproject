@@ -9,7 +9,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.db.models import Q
 from django.template.loader import render_to_string
-from django.http import JsonResponse,HttpResponse, HttpResponseRedirect, Http404
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, Http404
+
 
 # Create your views here.
 
@@ -22,6 +23,7 @@ def post_list(request):
                'categories': categories,
                }
     return render(request, template, context)
+
 
 @login_required
 def post_detail(request, pk):
@@ -41,9 +43,6 @@ def post_detail(request, pk):
     is_tablet = False
     if post.tablets.filter(id=request.user.id).exists():
         is_tablet = True
-
-
-
 
     form = CommentForm(request.POST or None)
     if form.is_valid():
@@ -143,10 +142,11 @@ def search_result(request):
     if request.method == 'GET':
         query = request.GET.get('q')
         object_list = Post.objects.filter(
-            Q(title__icontains=query)|Q(categories__icontains=query))
+            Q(title__icontains=query) | Q(categories__icontains=query))
 
     context = {'object_list': object_list}
     return render(request, 'blog/search_results.html', context)
+
 
 def contact_us(request):
     sent = False
@@ -169,7 +169,8 @@ def contact_us(request):
     else:
         contact_form = ContactForm()
         return render(request, 'blog/contact_us.html', {'contact_form': contact_form,
-                                                            'sent': sent})
+                                                        'sent': sent})
+
 
 @login_required
 def liked_post(request):
@@ -215,12 +216,13 @@ def favourite(request, ):
         is_favored = True
 
     context = {
-            'is_favored': is_favored,
-            'post': post
-        }
+        'is_favored': is_favored,
+        'post': post
+    }
     if request.is_ajax():
         html = render_to_string('blog/favorite_section.html', context, request=request)
         return JsonResponse({'form': html})
+
 
 def tablet_like(request, id):
     post = get_object_or_404(Post, id=id)

@@ -8,7 +8,9 @@
     </div>
     <p class="card-title">{{ port.name }}</p>
     <p class="card-text">{{ port.description }}</p>
-<a class="btn btn-success" href="{% url 'portfolio:port-update' port.pk %}">Edit Post</a>
+     {% if request.user.is_superuser %}
+        <a class="btn btn-success" href="{% url 'portfolio:port-update' port.pk %}">Edit Post</a>
+    {% endif %}
 </div>
 
 

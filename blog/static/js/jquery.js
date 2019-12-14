@@ -1,17 +1,24 @@
 
 $(document).ready(function(event) {
+    $('.footer').on('mouseenter', function () {
+        $(this).css('color','yellow');
+
+    })
+        .on('mouseleave', function () {
+            $(this).css('color', 'white')
+        });
+
+
+// $('a').on('mouseenter', function () {
+//      $(this).css('color', 'red');
+//  })
+//     .on('mouseleave', function () {
+//         $(this).css('color', 'blue')
+//     })
+ })
 
 
 
-
-
-
-});
-
-
-        // $("h3")
-        //     .on('mouseover', function () {
-        //     $(this).css('color', 'red')
-        // }).on('mouseout', function () {
-        //     $(this).css('color', 'black')
-        // });
+// $(document).ready(function () {
+//
+// })

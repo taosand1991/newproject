@@ -321,3 +321,14 @@ a.repeat:hover {
   height: 50px;
   color: white;
 }
+.portfolio{
+  margin-top: 30px;
+}
+
+iframe:focus {
+  outline: none;
+}
+
+iframe[seamless] {
+  display: block;
+}
