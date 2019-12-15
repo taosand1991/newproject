@@ -1,5 +1,5 @@
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponseForbidden, Http404, H
+from django.http import HttpResponseForbidden, Http404
 from django.utils.deprecation import MiddlewareMixin
 from django.shortcuts import reverse
 
