@@ -26,7 +26,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('portfolio/', include('portfolio.urls')),
     path('', include('social_django.urls', namespace='social')),
-    path('favicon', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
+    path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 
 ]
 if settings.DEBUG:
