@@ -18,14 +18,15 @@ from django.urls import path, include
 import django.contrib.auth
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('', include('accounts.urls')),
     path('portfolio/', include('portfolio.urls')),
-    path('', include('social_django.urls', namespace='social'))
+    path('', include('social_django.urls', namespace='social')),
+    path('favicon', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 
 ]
 if settings.DEBUG:
